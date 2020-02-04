@@ -7,12 +7,12 @@ import {ERC1820Client} from "erc1820/contracts/ERC1820Client.sol";
 contract TestTokensRecipient is ERC1820Client, IERC777Recipient {
 
     function tokensReceived(
-        address operator,
-        address from,
-        address to,
-        uint amount,
+        address /*operator*/,
+        address /*from*/,
+        address /*to*/,
+        uint /*amount*/,
         bytes memory userData,
-        bytes memory operatorData
+        bytes memory /*operatorData*/
     )
     public
     {
