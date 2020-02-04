@@ -6,6 +6,7 @@ exports.test = (f) => {
 
   before(async () => {
     context.ktyToken = await context.KTYtoken.deployed();
+    await context.ktyToken.mint(context.accounts[1], web3.utils.toWei('10000000'));
   });
 
   it('should not be able for addr 8 to transferFrom addr 1 without allowance privilages', async () => {
