@@ -6,6 +6,7 @@ exports.test = function(f) {
 
   before(async () => {
     context.ktyToken = await context.KTYtoken.deployed();
+    await context.ktyToken.mint(context.accounts[0], web3.utils.toWei('10000000'));
   });
 
   it('should be able to send tokens via erc777 send function', async () => {
