@@ -21,4 +21,8 @@ contract('KTYtoken', (accounts) => {
   describe('Erc777 operatorSend check', () => {
     require('./security/erc777Functionality/check_operatorSend').test(context);
   })
+
+  describe('Erc777 send tokens to contracts', () => {
+    require('./func/erc777Functionality/register_sender_recipient').test(context);
+  })
 });

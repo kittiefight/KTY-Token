@@ -20,4 +20,10 @@ contract TestTokensRecipient is ERC1820Client, IERC777Recipient {
             revert("TestTokensRecipient: tokensReceived reverted");
         }
     }
+
+    // solhint-disable-next-line no-unused-vars
+    function canImplementInterfaceForAddress(bytes32 /*interfaceHash*/, address /*addr*/) public view returns (bytes32) {
+        this;
+        return keccak256(abi.encodePacked("ERC1820_ACCEPT_MAGIC"));
+    }
 }
