@@ -27,6 +27,80 @@ contract Context {
 }
 
 /**
+ * @dev Contract module which provides a basic access control mechanism, where
+ * there is an account (an owner) that can be granted exclusive access to
+ * specific functions.
+ *
+ * This module is used through inheritance. It will make available the modifier
+ * `onlyOwner`, which can be applied to your functions to restrict their use to
+ * the owner.
+ */
+contract Ownable is Context {
+    address private _owner;
+
+    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
+
+    /**
+     * @dev Initializes the contract setting the deployer as the initial owner.
+     */
+    constructor () internal {
+        _owner = _msgSender();
+        emit OwnershipTransferred(address(0), _owner);
+    }
+
+    /**
+     * @dev Returns the address of the current owner.
+     */
+    function owner() public view returns (address) {
+        return _owner;
+    }
+
+    /**
+     * @dev Throws if called by any account other than the owner.
+     */
+    modifier onlyOwner() {
+        require(isOwner(), "Ownable: caller is not the owner");
+        _;
+    }
+
+    /**
+     * @dev Returns true if the caller is the current owner.
+     */
+    function isOwner() public view returns (bool) {
+        return _msgSender() == _owner;
+    }
+
+    /**
+     * @dev Leaves the contract without owner. It will not be possible to call
+     * `onlyOwner` functions anymore. Can only be called by the current owner.
+     *
+     * NOTE: Renouncing ownership will leave the contract without an owner,
+     * thereby removing any functionality that is only available to the owner.
+     */
+    function renounceOwnership() public onlyOwner {
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     * Can only be called by the current owner.
+     */
+    function transferOwnership(address newOwner) public onlyOwner {
+        _transferOwnership(newOwner);
+    }
+
+    /**
+     * @dev Transfers ownership of the contract to a new account (`newOwner`).
+     */
+    function _transferOwnership(address newOwner) internal {
+        require(newOwner != address(0), "Ownable: new owner is the zero address");
+        emit OwnershipTransferred(_owner, newOwner);
+        _owner = newOwner;
+    }
+}
+
+/**
  * @dev Interface of the ERC777Token standard as defined in the EIP.
  *
  * This contract uses the
@@ -1143,13 +1217,25 @@ contract ERC777 is Context, IERC777, IERC20 {
     }
 }
 
-contract KTYtoken is ERC777 {
+contract KTYtoken is Ownable, ERC777 {
     string constant NAME    = 'Kittiefight';
     string constant SYMBOL  = 'KTY';
-    uint256 constant TOTAL_SUPPLY = 100_000_000 * 10**18;
+    uint256 constant MAX_TOTAL_SUPPLY = 100_000_000 * 10**18;
 
     constructor() ERC777(NAME, SYMBOL, new address[](0)) public {
-        _mint(msg.sender, msg.sender, TOTAL_SUPPLY, '', '');
+    }
+
+    /**
+     * @notice Mint new KTY
+     * It also verifies that MAX_TOTAL_SUPPLY will not be exeeded by this call
+     * @param account Address to send minted tokens
+     * @param amount Amount of tokens to mint
+     * @return Should always return true
+     */
+    function mint(address account, uint256 amount) public onlyOwner returns (bool) {
+        require(totalSupply().add(amount) <= MAX_TOTAL_SUPPLY, "KTYtoken: cap exceeded");
+        _mint(_msgSender(), account, amount, '', '');
+        return true;
     }
 }
 
