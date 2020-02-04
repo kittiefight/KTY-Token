@@ -1,0 +1,66 @@
+{
+  "name": "call",
+  "version": "1.0.0",
+  "description": "Test",
+  "keywords": [
+    "ERC20",
+    "ERC777",
+    "Token",
+    "Solidity",
+    "Ethereum"
+  ],
+  "main": "truffle.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node .bin/test.js",
+    "sol-lint": "node_modules/solhint/solhint.js --formatter stylish contracts/**/*.sol contracts/*.sol",
+    "js-lint": "node_modules/eslint/bin/eslint.js --max-warnings 0 --format eslint-formatter-stylish-verbose test/ migrations/ .bin/",
+    "lint": "npm run sol-lint && npm run js-lint",
+    "check": "npm run lint && npm run build && npm run test",
+    "build": "npm run clean && npm run truffle build",
+    "prepublishOnly": "npm install && npm run build",
+    "clean": "rm -rf ./build ./coverage ./coverage.json",
+    "coverage": "node ./node_modules/solidity-coverage/bin/exec.js",
+    "truffle": "node ./node_modules/truffle/build/cli.bundled.js",
+    "ganache": "ganache-cli -g 2000000000 -l 20000000 -i 999 -a 100 -p 7545 -e 10000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/ppanos/call.git"
+  },
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://gitlab.com/ppanos/call/issues"
+  },
+  "homepage": "https://gitlab.com/ppanos/call#readme",
+  "dependencies": {
+    "erc1820": "0.0.2",
+    "nyc": "^14.1.1",
+    "openzeppelin-solidity": "^2.3.0",
+    "scrypt": "^6.0.3"
+  },
+  "devDependencies": {
+    "bignumber.js": "git+https://github.com/frozeman/bignumber.js-nolookahead.git",
+    "chai": "^4.2.0",
+    "eip55": "^1.0.3",
+    "eslint": "^6.5.1",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-formatter-stylish-verbose": "^0.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-mocha": "^6.1.1",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eth-gas-reporter": "^0.2.12",
+    "ganache-cli": "^6.7.0",
+    "openzeppelin-test-helpers": "^0.4.3",
+    "random-bytes": "^1.0.0",
+    "solhint": "^2.3.0",
+    "solidity-coverage": "^0.6.7",
+    "truffle": "^5.0.40",
+    "web3": "^1.2.1"
+  },
+  "author": ""
+}

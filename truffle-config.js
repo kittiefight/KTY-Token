@@ -1,26 +1,34 @@
 module.exports = {
-    networks: {
-        development: {
-            host: "127.0.0.1",
-            port: 8545,
-            network_id: "*"
-        },
-        test: {
-            host: "127.0.0.1",
-            port: 8545,
-            network_id: "*"
-        }
+  networks: {
+    development: {
+      host: '127.0.0.1',
+      port: 7545,
+      network_id: 999,
+      gas: 8999999,
+      gasPrice: 2000000000,
     },
-    // Configure your compilers
-    compilers: {
-        solc: {
-            version: "0.5.16",
-            settings: {
-                optimizer: {
-                    enabled: true,
-                    runs: 200,
-                },
-            },
-        },
-    }
+    live: {
+      host: 'infura.io',
+      port: 80,
+      network_id: 1,
+    },
+    coverage: {
+      host: 'localhost',
+      network_id: '*',
+      port: 8555,
+      gas: 0xfffffffffff,
+      gasPrice: 0x01,
+    },
+  },
+  compilers: {
+    solc: {
+      version: '0.5.16',
+    },
+  },
+  mocha: {
+    reporter: 'eth-gas-reporter',
+    reporterOptions: {
+      currency: 'EUR',
+    },
+  },
 };
