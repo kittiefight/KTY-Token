@@ -14,12 +14,14 @@ contract('KTYtoken', (accounts) => {
     require('./func/erc777Functionality/sendTokens').test(context);
   })
 
-  describe('Erc20 transferFrom check', () => {
-    require('./security/erc20Functionality/check_transferFrom').test(context);
+  describe('Erc20 functionality check', () => {
+    require('./security/erc20Functionality/check_transfer_edges').test(context);
+    require('./security/erc20Functionality/check_functionality_edges').test(context);
   })
 
-  describe('Erc777 operatorSend check', () => {
-    require('./security/erc777Functionality/check_operatorSend').test(context);
+  describe('Erc777 functionality check', () => {
+    require('./security/erc777Functionality/check_send_edges').test(context);
+    require('./security/erc777Functionality/check_operator_edges').test(context);
   })
 
   describe('Erc777 send tokens to contracts', () => {
