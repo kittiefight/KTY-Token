@@ -1,5 +1,5 @@
 {
-  "name": "call",
+  "name": "Kittiefight",
   "version": "1.0.0",
   "description": "Test",
   "keywords": [
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/ppanos/call.git"
+    "url": "git+https://github.com/kittiefight/KTY-Token"
   },
   "license": "GPL-3.0",
   "bugs": {
