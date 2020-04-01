@@ -16,7 +16,7 @@ exports.test = (f) => {
     await expectRevert(context.ktyToken.approve(
       context.address0, value.toString(),
       { gas: 900000, from: context.accounts[1] }
-    ), 'ERC777: approve to the zero address');
+    ), 'ERC20: approve to the zero address');
   });
 
   it('should not be able for addr 0 to mint to address(0)', async () => {
@@ -25,6 +25,6 @@ exports.test = (f) => {
     await expectRevert(context.ktyToken.mint(
       context.address0, value.toString(),
       { gas: 900000, from: context.accounts[0] }
-    ), 'ERC777: mint to the zero address');
+    ), 'ERC20: mint to the zero address');
   });
 };
