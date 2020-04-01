@@ -1,14 +1,16 @@
 pragma solidity ^0.5.0;
 
-import './openzeppelin_v2_4_0/token/ERC777/ERC777.sol';
+import './openzeppelin_v2_4_0/token/ERC20/ERC20.sol';
+import './openzeppelin_v2_4_0/token/ERC20/ERC20Detailed.sol';
 import './openzeppelin_v2_4_0/ownership/Ownable.sol';
 
-contract KTYtoken is Ownable, ERC777 {
+contract KTYtoken is Ownable, ERC20, ERC20Detailed {
     string constant NAME    = 'Kittiefight';
     string constant SYMBOL  = 'KTY';
-    uint256 constant MAX_TOTAL_SUPPLY = 100_000_000 * 10**18;
+    string constant DECIMALS  = 18;
+    uint256 constant MAX_TOTAL_SUPPLY = 100_000_000 * 10**DECIMALS;
 
-    constructor() ERC777(NAME, SYMBOL, new address[](0)) public {
+    constructor() ERC20Detailed(NAME, SYMBOL, DECIMALS) public {
     }
 
     /**
