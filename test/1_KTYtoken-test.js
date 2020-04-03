@@ -10,15 +10,17 @@ contract('KTYtoken', (accounts) => {
     require('./func/erc20Functionality/transferTokens').test(context);
   })
 
-  describe('Erc777 sends', () => {
-    require('./func/erc777Functionality/sendTokens').test(context);
+  describe('Erc20 burn tokens', () => {
+    require('./func/erc20Functionality/burnTokens').test(context);
   })
 
-  describe('Erc20 transferFrom check', () => {
-    require('./security/erc20Functionality/check_transferFrom').test(context);
+  describe('KTY attributes', () => {
+    require('./func/KTY-attributes').test(context);
   })
 
-  describe('Erc777 operatorSend check', () => {
-    require('./security/erc777Functionality/check_operatorSend').test(context);
+  describe('Erc20 functionality check', () => {
+    require('./security/erc20Functionality/check_transfer_edges').test(context);
+    require('./security/erc20Functionality/check_functionality_edges').test(context);
   })
+
 });
