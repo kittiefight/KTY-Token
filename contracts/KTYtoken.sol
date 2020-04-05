@@ -2,11 +2,10 @@ pragma solidity ^0.5.0;
 
 import './openzeppelin_v2_5_0/token/ERC20/ERC20.sol';
 import './openzeppelin_v2_5_0/token/ERC20/ERC20Detailed.sol';
-import './openzeppelin_v2_5_0/token/ERC20/ERC20Burnable.sol';
 import './openzeppelin_v2_5_0/ownership/Ownable.sol';
 import './openzeppelin_v2_5_0/math/SafeMath.sol';
 
-contract KTYtoken is Ownable, ERC20, ERC20Detailed, ERC20Burnable {
+contract KTYtoken is Ownable, ERC20, ERC20Detailed {
     using SafeMath for uint256;
 
     string constant NAME    = 'Kittiefight';
@@ -29,5 +28,15 @@ contract KTYtoken is Ownable, ERC20, ERC20Detailed, ERC20Burnable {
         _mint(account, amount);
         return true;
     }
+
+    /**
+     * @dev Destroys `amount` tokens from the caller.
+     *
+     * See {ERC20-_burn}.
+     */
+    function burn(uint256 amount) public {
+        _burn(_msgSender(), amount);
+    }
+
 }
 

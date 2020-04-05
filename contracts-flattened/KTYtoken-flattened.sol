@@ -533,29 +533,6 @@ contract ERC20Detailed is IERC20 {
 }
 
 /**
- * @dev Extension of {ERC20} that allows token holders to destroy both their own
- * tokens and those that they have an allowance for, in a way that can be
- * recognized off-chain (via event analysis).
- */
-contract ERC20Burnable is Context, ERC20 {
-    /**
-     * @dev Destroys `amount` tokens from the caller.
-     *
-     * See {ERC20-_burn}.
-     */
-    function burn(uint256 amount) public {
-        _burn(_msgSender(), amount);
-    }
-
-    /**
-     * @dev See {ERC20-_burnFrom}.
-     */
-    function burnFrom(address account, uint256 amount) public {
-        _burnFrom(account, amount);
-    }
-}
-
-/**
  * @dev Contract module which provides a basic access control mechanism, where
  * there is an account (an owner) that can be granted exclusive access to
  * specific functions.
@@ -630,7 +607,7 @@ contract Ownable is Context {
     }
 }
 
-contract KTYtoken is Ownable, ERC20, ERC20Detailed, ERC20Burnable {
+contract KTYtoken is Ownable, ERC20, ERC20Detailed {
     using SafeMath for uint256;
 
     string constant NAME    = 'Kittiefight';
@@ -652,5 +629,14 @@ contract KTYtoken is Ownable, ERC20, ERC20Detailed, ERC20Burnable {
         require(totalSupply().add(amount) <= MAX_TOTAL_SUPPLY, "KTYtoken: cap exceeded");
         _mint(account, amount);
         return true;
+    }
+
+    /**
+     * @dev Destroys `amount` tokens from the caller.
+     *
+     * See {ERC20-_burn}.
+     */
+    function burn(uint256 amount) public {
+        _burn(_msgSender(), amount);
     }
 }
