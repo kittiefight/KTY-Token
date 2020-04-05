@@ -89,7 +89,7 @@ exports.test = function (f) {
             })
         ).to.have.nested.property('receipt.status', true)
     })
-
+    /*
     it('should be able for addr 6 to burnFrom for addrs 4,5', async () => {
         const tokenBurn = 1000;
         const value = new BN(web3.utils.toWei(tokenBurn.toString()));
@@ -129,4 +129,5 @@ exports.test = function (f) {
             expect(burnAmount).to.be.equal(tokenBurn);
         }
     })
+    */
 }
